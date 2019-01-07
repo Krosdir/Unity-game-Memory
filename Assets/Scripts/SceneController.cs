@@ -13,10 +13,12 @@ public class SceneController : MonoBehaviour
     [SerializeField] private MemoryCard originalCard;
     [SerializeField] private Sprite[] images;
     [SerializeField] private TextMesh scoreLabel;
+    [SerializeField] private TextMesh stepsLabel;
 
     private MemoryCard _firstRevealed;
     private MemoryCard _secondRevealed;
     private int _score = 0;
+    private int _steps = 0;
 
     public bool CanReveal
     {
@@ -28,7 +30,10 @@ public class SceneController : MonoBehaviour
         if (_firstRevealed == null)
             _firstRevealed = card;
         else
+        {
             _secondRevealed = card;
+            stepsLabel.text = "Steps: " + ++_steps;
+        }
         StartCoroutine(CheckMatch());
     }
 
